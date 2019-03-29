@@ -1,8 +1,8 @@
 package com.bookshop.mapper;
 
 import com.bookshop.pojo.User;
-import org.springframework.stereotype.Repository;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    // ---------------------------------------------
+    //----------------------
     int checkUsername(String username);
 
     int checkEmail(String email);

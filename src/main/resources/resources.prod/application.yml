@@ -1,0 +1,16 @@
+# mysql
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.95.255.212:3306/bookshop
+    username: bookshop
+    password: bs@alymysql2019
+
+# mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.bookshop.pojo
+
+# server
+server:
+  port: 8080

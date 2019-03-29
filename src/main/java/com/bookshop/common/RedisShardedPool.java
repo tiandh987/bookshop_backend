@@ -1,12 +1,14 @@
 package com.bookshop.common;
 
+
+
 import com.bookshop.util.PropertiesUtil;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisShardInfo;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
-import redis.clients.util.Sharded;
 import redis.clients.util.Hashing;
+import redis.clients.util.Sharded;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ public class RedisShardedPool {
     private static Boolean testOnBorrow = Boolean.parseBoolean(PropertiesUtil.getProperty("redis.test.borrow", "true"));
     //在return一个Jedis实例的时候，是否进行验证操作
     //如果赋值为true，则放回JedisPool的Jedis实例肯定是可用的
-    private static Boolean testOnReturn = Boolean.parseBoolean(PropertiesUtil.getProperty("redis.test.return", "false"));
+    private static Boolean testOnReturn = Boolean.parseBoolean(PropertiesUtil.getProperty("redis.test.return", "true"));
     //redis1.host
     private static String redis1Host = PropertiesUtil.getProperty("redis1.host");
     //redis1.port
@@ -51,9 +53,9 @@ public class RedisShardedPool {
 
         JedisShardInfo info1 = new JedisShardInfo(redis1Host, redis1Port, 1000*2);
         //如果redis有密码，调用此方法
-        info1.setPassword("qduredis6379");
+        info1.setPassword(PropertiesUtil.getProperty("redis1.password"));
         JedisShardInfo info2 = new JedisShardInfo(redis2Host, redis2Port, 1000*2);
-        info2.setPassword("qduredis6380");
+        info2.setPassword(PropertiesUtil.getProperty("redis2.password"));
 
         List<JedisShardInfo> jedisShardInfoList = new ArrayList<>();
         jedisShardInfoList.add(info1);
@@ -61,7 +63,8 @@ public class RedisShardedPool {
 
         //初始化ShardedJedisPool, 超时时间：1000*2 单位为毫秒
         //Hashing.MURMUR_HASH 对应一致性算法
-        pool = new ShardedJedisPool(config, jedisShardInfoList, Hashing.MURMUR_HASH, Sharded.DEFAULT_KEY_TAG_PATTERN);
+//        pool = new ShardedJedisPool(config, jedisShardInfoList, Hashing.MURMUR_HASH, Sharded.DEFAULT_KEY_TAG_PATTERN);
+        pool = new ShardedJedisPool(config, jedisShardInfoList);
 
     }
 

@@ -146,21 +146,19 @@
       answer = #{answer,jdbcType=VARCHAR},
       role = #{role,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = now()
-    where id = #{id,jdbcType=INTEGER}
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = now()
   </update>
 
-    <!--**************************自定义*************************-->
+
     <select id="checkUsername" parameterType="string" resultType="int">
     select
     count(1)
     from bookshop_user
     where username = #{username}
   </select>
-  <select id="checkEmail" parameterType="java.lang.String" resultType="int">
-    select
-    count(1)
-    from bookshop_user
+    <select id="checkEmail" parameterType="java.lang.String" resultType="int">
+    select count(1) from bookshop_user
     where email = #{email}
   </select>
     <select id="selectLogin" resultMap="BaseResultMap" parameterType="java.util.Map">
@@ -170,7 +168,6 @@
         where username = #{username}
         and password = #{password}
     </select>
-
     <select id="selectQuestionByUsername" parameterType="java.lang.String" resultType="java.lang.String">
     select question
     from bookshop_user

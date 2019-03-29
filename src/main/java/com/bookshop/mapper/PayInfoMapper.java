@@ -1,7 +1,9 @@
 package com.bookshop.mapper;
 
 import com.bookshop.pojo.PayInfo;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PayInfoMapper {
     int deleteByPrimaryKey(Integer id);
 
