@@ -15,7 +15,7 @@ public class AppraiseVo {
 
     private Integer grade;
 
-    private Date create_time;
+    private Date createTime;
 
     private  String username;
 
@@ -67,12 +67,12 @@ public class AppraiseVo {
         this.grade = grade;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getUsername() {

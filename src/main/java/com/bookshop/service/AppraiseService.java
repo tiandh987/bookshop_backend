@@ -5,6 +5,8 @@ import com.bookshop.mapper.AppraiseMapper;
 import com.bookshop.pojo.Appraise;
 import com.bookshop.vo.AppraiseQueryModel;
 import com.bookshop.vo.AppraiseVo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,10 +50,12 @@ public class AppraiseService implements IAppraiseService {
 
     //查询商品的评论信息 带过滤
     @Override
-    public ServerResponse<List<AppraiseVo>> queryAppraiseByQueryModel(AppraiseQueryModel queryModel) {
+    public ServerResponse<PageInfo> queryAppraiseByQueryModel(AppraiseQueryModel queryModel,int pageNum,int pageSize) {
         try {
             List<AppraiseVo> appraiseVos = appraiseMapper.selectByQueryModel(queryModel.getProductId(), queryModel.getOrderId(), queryModel.getGrade());
-            return ServerResponse.createBySuccess(appraiseVos);
+            PageHelper.startPage(pageNum, pageSize);
+            PageInfo pageInfo = new PageInfo(appraiseVos);
+            return ServerResponse.createBySuccess(pageInfo);
         } catch (Exception ex) {
             String msg = "查询评价出现异常，请联系管理员。";
             return ServerResponse.createByErrorMessage(msg);
