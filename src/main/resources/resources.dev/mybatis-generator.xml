@@ -7,7 +7,7 @@
 
     <properties resource="application.yml" />
     <!-- mysql驱动的位置 这个是MySQL连接的jar包，你需要指定你自己计算机上的jar包的位置-->
-    <classPathEntry location="C:\Users\lenovo\.m2\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar" />
+    <classPathEntry location="C:\Users\13257\.m2\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar" />
 
     <context id="Tables" targetRuntime="MyBatis3">
 
@@ -22,9 +22,9 @@
         <!-- JDBC连接 其中connectionURL后面的newtest改为你创建的数据库，紧跟在后面是数据库连接的账户和密码-->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://localhost:3306/bookshop"
-                userId="root"
-                password="123456">
+                connectionURL="jdbc:mysql://47.95.255.212:3306/bookshop"
+                userId="bookshop"
+                password="bs@alymysql2019">
         </jdbcConnection>
 
         <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
@@ -107,5 +107,10 @@
                enableUpdateByExample="false">
         </table>
 
+        <table schema="bookshop" tableName="bookshop_appraise"
+               domainObjectName="PayInfo" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+        </table>
     </context>
 </generatorConfiguration>
