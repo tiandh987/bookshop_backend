@@ -23,6 +23,8 @@ public class OrderItemVo {
 
     private String createTime;
 
+    private Boolean pIsAppraise;
+
     public Long getOrderNo() {
         return orderNo;
     }
@@ -85,5 +87,14 @@ public class OrderItemVo {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public Boolean getpIsAppraise()
+    {
+        return pIsAppraise;
+    }
+
+    public void setpIsAppraise(Boolean pIsAppraise){
+        this.pIsAppraise = pIsAppraise;
     }
 }

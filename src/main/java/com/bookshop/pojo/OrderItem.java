@@ -26,6 +26,8 @@ public class OrderItem {
 
     private Date updateTime;
 
+    private Integer isAppraise;
+
     public Integer getId() {
         return id;
     }
@@ -112,5 +114,13 @@ public class OrderItem {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getIsAppraise() {
+        return isAppraise;
+    }
+
+    public void setIsAppraise(Integer isAppraise) {
+        this.isAppraise = isAppraise;
     }
 }

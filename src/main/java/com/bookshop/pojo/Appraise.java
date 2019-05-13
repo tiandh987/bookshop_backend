@@ -9,7 +9,7 @@ public class Appraise {
 
     private Integer userId;
 
-    private Integer orderId;
+    private Long orderId;
 
     private String text;
 
@@ -41,11 +41,11 @@ public class Appraise {
         this.userId = userId;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 

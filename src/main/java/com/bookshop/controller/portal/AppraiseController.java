@@ -62,6 +62,7 @@ public class AppraiseController {
         if (user == null) {
             return ServerResponse.createByErrorMessage("用户未登录");
         }
+        appraise.setUserId(user.getId());
         return appraiseService.saveAppraise(appraise);
     }
 

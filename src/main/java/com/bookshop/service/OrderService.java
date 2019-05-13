@@ -83,6 +83,7 @@ public class OrderService implements IOrderService {
         }
         for (OrderItem orderItem : orderItemList){
             orderItem.setOrderNo(order.getOrderNo());
+            orderItem.setIsAppraise(0);
         }
 
         //myBatis 批量插入
@@ -312,6 +313,12 @@ public class OrderService implements IOrderService {
         orderItemVo.setQuantity(orderItem.getQuantity());
         orderItemVo.setTotalPrice(orderItem.getTotalPrice());
         orderItemVo.setCreateTime(DateTimeUtil.dateToStr(orderItem.getCreateTime()));
+        if (1 == orderItem.getIsAppraise()) {
+            orderItemVo.setpIsAppraise(true);
+        }else {
+            orderItemVo.setpIsAppraise(false);
+        }
+
         return orderItemVo;
     }
 

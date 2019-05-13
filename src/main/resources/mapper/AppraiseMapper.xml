@@ -8,7 +8,7 @@
         <result column="grade" property="grade" jdbcType="INTEGER" />
         <result column="text" property="text" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-        <result column="order_id" property="orderId" jdbcType="INTEGER" />
+        <result column="order_id" property="orderId" jdbcType="BIGINT" />
     </resultMap>
 
     <resultMap id="QueryListResultMap" type="com.bookshop.vo.AppraiseVo">
@@ -18,7 +18,7 @@
         <result column="grade" property="grade" jdbcType="INTEGER" />
         <result column="text" property="text" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-        <result column="order_id" property="orderId" jdbcType="INTEGER" />
+        <result column="order_id" property="orderId" jdbcType="BIGINT" />
         <result column="username" property="username" jdbcType="VARCHAR"/>
     </resultMap>
 
@@ -49,7 +49,7 @@
     insert into bookshop_appraise (id, product_id, user_id,
       grade, text, create_time, order_id)
     values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
-      #{grade,jdbcType=INTEGER}, #{text,jdbcType=VARCHAR}, now(), #{orderId,jdbcType=INTEGER})
+      #{grade,jdbcType=INTEGER}, #{text,jdbcType=VARCHAR}, now(), #{orderId,jdbcType=BIGINT})
     </insert>
     <!--订单页判断是否已评价用-->
     <select id="selectCountByOrderId" parameterType="int" resultType="int">
