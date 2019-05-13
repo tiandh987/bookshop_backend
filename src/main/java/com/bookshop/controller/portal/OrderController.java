@@ -145,7 +145,9 @@ public class OrderController {
         String userJsonStr = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.stringToObject(userJsonStr, User.class);
         if (user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());return iOrderService.confirmReceipt(orderNo);
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        return iOrderService.confirmReceipt(orderNo);
     }
 
 
