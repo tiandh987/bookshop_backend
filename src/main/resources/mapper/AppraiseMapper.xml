@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bookshop.mapper.AppraiseMapper" >
+    <resultMap id="BaseResultMap" type="com.bookshop.pojo.Appraise" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="product_id" property="productId" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="grade" property="grade" jdbcType="INTEGER" />
+        <result column="text" property="text" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <resultMap id="QueryListResultMap" type="com.bookshop.vo.AppraiseVo">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="product_id" property="productId" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="grade" property="grade" jdbcType="INTEGER" />
+        <result column="text" property="text" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="order_id" property="orderId" jdbcType="INTEGER" />
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    id, product_id, user_id, grade, text, create_time, order_id
+  </sql>
+
+    <!--商品页面显示评论用-->
+    <select id="selectByQueryModel" resultMap="QueryListResultMap" parameterType="map" >
+        select
+        ba.id, ba.product_id, ba.user_id, ba.grade, ba.text, ba.create_time, ba.order_id, bu.username
+        from bookshop_appraise as ba
+        left join bookshop_user as bu ON ba.user_id = bu.id
+        where 1 = 1
+        <if test="productId != null">
+          and ba.product_id = #{productId,jdbcType=INTEGER}
+        </if>
+        <if test="orderId != null">
+          and ba.order_id = #{orderId,jdbcType=INTEGER}
+        </if>
+        <if test="grade != null">
+          and ba.grade = #{grade,jdbcType=INTEGER}
+        </if>
+        order by  ba.create_time desc
+    </select>
+    <!--插入评价用-->
+    <insert id="insert" parameterType="com.bookshop.pojo.Appraise" >
+    insert into bookshop_appraise (id, product_id, user_id,
+      grade, text, create_time, order_id)
+    values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+      #{grade,jdbcType=INTEGER}, #{text,jdbcType=VARCHAR}, now(), #{orderId,jdbcType=INTEGER})
+    </insert>
+    <!--订单页判断是否已评价用-->
+    <select id="selectCountByOrderId" parameterType="int" resultType="int">
+    select
+    count(1)
+    from bookshop_appraise
+    where order_id = #{orderId,jdbcType=INTEGER}
+    </select>
+
+ </mapper>

@@ -38,7 +38,7 @@ public class CategoryManageController {
 
         //全部通过拦截器验证，已登录管理员账号
         return iCategoryService.updateCategoryName(categoryId,categoryName);
-    }
+}
 
     //查询子节点的平级节点
     @RequestMapping(value = "get_category.do",method = RequestMethod.POST)
