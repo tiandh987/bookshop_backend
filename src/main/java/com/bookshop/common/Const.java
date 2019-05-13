@@ -64,11 +64,11 @@ public class Const {
     //订单状态
     public enum OrderStatus{
         CANCELED(0,"已取消"),
-        NO_PAY(10,"未支付"),
-        PAID(20,"已付款"),
-        SHIPPED(40,"已发货"),
-        ORDER_SUCCESS(50,"订单完成"),
-        ORDER_CLOSE(60,"订单关闭")
+        NO_PAY(10,"待付款"),
+        PAID(20,"待发货"),
+        SHIPPED(40,"待收货"),
+        ORDER_SUCCESS(50,"待评价"),
+        ORDER_CLOSE(60,"交易完成")
         ;
 
         OrderStatus(int code,String value){

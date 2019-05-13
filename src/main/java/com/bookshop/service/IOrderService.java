@@ -27,6 +27,7 @@ public interface IOrderService {
 
     ServerResponse<String> manageSendGoods(Long orderNo);
 
+    ServerResponse confirmReceipt(Long orderNo);
 
 
     //*********************对接支付宝******************************

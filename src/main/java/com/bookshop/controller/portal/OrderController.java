@@ -132,6 +132,22 @@ public class OrderController {
         return iOrderService.getOrderList(user.getId(),pageNum,pageSize);
     }
 
+    // 确定收货
+    @RequestMapping("confirmReceipt.do")
+    @ResponseBody
+    public ServerResponse confirmReceipt(HttpServletRequest httpServletRequest,Long orderNo){
+        //从客户端中读取Cookie
+        String loginToken = CookieUtil.readLoginCookie(httpServletRequest);
+        if (StringUtils.isEmpty(loginToken)) {
+            return ServerResponse.createByErrorMessage("用户未登录");
+        }
+        //从redis中获取User的json字符串
+        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
+        User user = JsonUtil.stringToObject(userJsonStr, User.class);
+        if (user == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());return iOrderService.confirmReceipt(orderNo);
+    }
+
 
     //*********************对接支付宝******************************
     @RequestMapping("pay.do")

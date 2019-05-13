@@ -227,6 +227,21 @@ public class OrderService implements IOrderService {
         return ServerResponse.createByErrorMessage("订单不存在");
     }
 
+    //确认收货，修改订单状态
+    @Override
+    public ServerResponse confirmReceipt(Long orderNo) {
+        Order order = orderMapper.selectByOrderNo(orderNo);
+        if (order != null){
+            if(order.getStatus() == Const.OrderStatus.SHIPPED.getCode()){
+                order.setStatus(Const.OrderStatus.ORDER_SUCCESS.getCode());
+                order.setSendTime(new Date());
+                orderMapper.updateByPrimaryKeySelective(order);
+                return ServerResponse.createBySuccess("收货成功");
+            }
+        }
+        return ServerResponse.createByErrorMessage("订单不存在");
+    }
+
     //
     private List<OrderVo> assembleOrderVoList(List<Order> orderList,Integer userId){
         List<OrderVo> orderVoList = Lists.newArrayList();
