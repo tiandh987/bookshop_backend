@@ -8,6 +8,7 @@ import com.bookshop.mapper.OrderMapper;
 import com.bookshop.pojo.Appraise;
 import com.bookshop.pojo.Order;
 import com.bookshop.pojo.OrderItem;
+import com.bookshop.util.DateTimeUtil;
 import com.bookshop.vo.AppraiseQueryModel;
 import com.bookshop.vo.AppraiseVo;
 import com.github.pagehelper.PageHelper;
@@ -15,6 +16,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -85,7 +87,17 @@ public class AppraiseService implements IAppraiseService {
     @Override
     public ServerResponse<PageInfo> queryAppraiseByQueryModel(AppraiseQueryModel queryModel,int pageNum,int pageSize) {
         try {
-            List<AppraiseVo> appraiseVos = appraiseMapper.selectByQueryModel(queryModel.getProductId(), queryModel.getOrderId(), queryModel.getGrade());
+            List<Appraise> appraiseList = appraiseMapper.selectByQueryModel(queryModel.getProductId(), queryModel.getOrderId(), queryModel.getGrade());
+            List<AppraiseVo> appraiseVos = new ArrayList<>();
+            for (Appraise appraise: appraiseList) {
+                AppraiseVo appraiseVo = new AppraiseVo();
+                String dateString = DateTimeUtil.dateToStr(appraise.getCreateTime());
+                appraiseVo.setCreateTime(dateString);
+                appraiseVo.setGrade(appraise.getGrade());
+                appraiseVo.setProductId(appraise.getProductId());
+                appraiseVo.setText(appraise.getText());
+                appraiseVos.add(appraiseVo);
+            }
             PageHelper.startPage(pageNum, pageSize);
             PageInfo pageInfo = new PageInfo(appraiseVos);
             return ServerResponse.createBySuccess(pageInfo);

@@ -24,7 +24,7 @@ public class AppraiseController {
     @Autowired
     private IAppraiseService appraiseService;
 
-    @RequestMapping(value = "query_appraise_model.do", method = RequestMethod.GET)
+    @RequestMapping(value = "query_appraise_model.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<PageInfo> QueryAppraiseByQueryModel(HttpServletRequest httpServletRequest, AppraiseQueryModel queryModel, Integer pageNum, Integer pageSize) {
         //从客户端中读取Cookie
