@@ -93,10 +93,15 @@
         </dependency>
         <!--分页组件 pagehelper ，依赖包：mybatis-paginator 、jsqlparser-->
         <!--pagehelper -->
+        <!--<dependency>-->
+            <!--<groupId>com.github.pagehelper</groupId>-->
+            <!--<artifactId>pagehelper</artifactId>-->
+            <!--<version>5.1.2</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>5.1.2</version>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
         </dependency>
         <!-- mybatis-paginator -->
         <dependency>

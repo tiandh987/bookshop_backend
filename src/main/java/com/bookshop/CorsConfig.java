@@ -11,8 +11,8 @@ public class CorsConfig {
 
     private CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-//        corsConfiguration.addAllowedOrigin("http://47.95.255.212:8088"); // 允许任何域名使用
-        corsConfiguration.addAllowedOrigin("*");
+        corsConfiguration.addAllowedOrigin("http://47.95.255.212:8088"); // 允许任何域名使用
+//        corsConfiguration.addAllowedOrigin("*");
         corsConfiguration.addAllowedHeader("*"); // 允许任何头
         corsConfiguration.addAllowedMethod("*"); // 允许任何方法（post、get等）
         corsConfiguration.setAllowCredentials(true);

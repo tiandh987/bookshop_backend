@@ -87,6 +87,7 @@ public class AppraiseService implements IAppraiseService {
     @Override
     public ServerResponse<PageInfo> queryAppraiseByQueryModel(AppraiseQueryModel queryModel,int pageNum,int pageSize) {
         try {
+            PageHelper.startPage(pageNum, pageSize);
             List<Appraise> appraiseList = appraiseMapper.selectByQueryModel(queryModel.getProductId(), queryModel.getOrderId(), queryModel.getGrade());
             List<AppraiseVo> appraiseVos = new ArrayList<>();
             for (Appraise appraise: appraiseList) {
@@ -98,8 +99,9 @@ public class AppraiseService implements IAppraiseService {
                 appraiseVo.setText(appraise.getText());
                 appraiseVos.add(appraiseVo);
             }
-            PageHelper.startPage(pageNum, pageSize);
-            PageInfo pageInfo = new PageInfo(appraiseVos);
+
+            PageInfo pageInfo = new PageInfo(appraiseList);
+            pageInfo.setList(appraiseVos);
             return ServerResponse.createBySuccess(pageInfo);
         } catch (Exception ex) {
             String msg = "查询评价出现异常，请联系管理员。";
