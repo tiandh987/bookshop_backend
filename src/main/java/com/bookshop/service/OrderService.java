@@ -313,12 +313,15 @@ public class OrderService implements IOrderService {
         orderItemVo.setQuantity(orderItem.getQuantity());
         orderItemVo.setTotalPrice(orderItem.getTotalPrice());
         orderItemVo.setCreateTime(DateTimeUtil.dateToStr(orderItem.getCreateTime()));
-        if (1 == orderItem.getIsAppraise()) {
-            orderItemVo.setpIsAppraise(true);
+        if(orderItem.getIsAppraise() != null) {
+            if (1 == orderItem.getIsAppraise()) {
+                orderItemVo.setpIsAppraise(true);
+            }else {
+                orderItemVo.setpIsAppraise(false);
+            }
         }else {
-            orderItemVo.setpIsAppraise(false);
+            orderItemVo.setpIsAppraise(null);
         }
-
         return orderItemVo;
     }
 
